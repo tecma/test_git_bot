@@ -1,30 +1,35 @@
 #!/usr/bin/python3
 
-# работа с ос
-import os
 
-# время
-import time
-
-# subprocess module (для прямой работы с sh)
-from subprocess import call
+import os # работа с ос
+import time # время
+from subprocess import call # subprocess module (для прямой работы с sh)
 
 # регулярки
 import re
 
 
 def git_looker():
-    time.sleep(3) # in seconds
     call (['git', 'pull'])
+    time.sleep(3.5) # in seconds
 
+
+while True:
+    pass
+    git_looker()
 
 
 # git log --pretty=short
 
 
+# нужна автопушилка коммитов
+# нужна также тестовая автопушилка коммитов, создающая файлы и периодически затирающая их
+# по-толковому нужны проверки на результат сразу же
+
 #
 #1. по таймеру проверять обновления в мастер ветке
 #   если обновления есть, то вывести только автора\дату\файл\и внесённые изменения целиком
+#   нужно как-то не выводить результаты проверки, если ничего нету
 #
 #2. если это док, то выводить полностью + кидать в лог и раскрывать лог при запуске скрипта,
 #
@@ -34,7 +39,7 @@ def git_looker():
 # добавить отрисовку отделяющих строк
 
 # call (['git', 'status'])
-call (['git', 'log', '--pretty=short'])
+# call (['git', 'log', '--pretty=short'])
 
 
 
