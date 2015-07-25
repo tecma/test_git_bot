@@ -23,9 +23,11 @@ def git_pusher():
     os.chdir(FILES_PATH)
     if (len(FILES_PATH) >= 5):
         call (['git', 'add', '*'])
-        time.sleep(1.5) # in seconds
+        time.sleep(1) # in seconds
         call (['git', 'commit', '-a', '--allow-empty-message', '-m', ' ' ])
-        time.sleep(1.5)
+        time.sleep(1)
+        call (['git', 'push'])
+        time.sleep(2.5)
     else:
         print ('Надо набрать 5 файлов')
 
