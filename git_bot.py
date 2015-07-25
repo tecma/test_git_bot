@@ -6,7 +6,7 @@ from subprocess import call # subprocess module (для прямой работ�
 
 def git_looker():
     call (['git', 'pull'])
-    time.sleep(3.5) # in seconds
+    time.sleep(1) # in seconds
 
 
 while True:
