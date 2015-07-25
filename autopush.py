@@ -3,15 +3,15 @@
 import os, time, uuid # работа с ос, время, регулярки, создание уникальных строк
 from subprocess import call # subprocess module (для прямой работы с sh)
 
-exec_path = os.path.abspath(os.curdir)
-files_path = exec_path+'/pusherfiles/'
+EXEC_PATH = os.path.abspath(os.curdir)
+FILES_PATH = EXEC_PATH+'/pusherfiles/'
 
 
 def file_toucher(): # создаём случайные файлы
 
     file_id = (str(uuid.uuid4()).upper()[0:6]) # создаём уникальный id
 
-    touch = open(files_path+file_id,"w") # создаём файл с этим ид
+    touch = open(FILES_PATH+file_id,"w") # создаём файл с этим ид
     touch.write(str(file_id)) # записываем в него id 
     touch.close()
 
@@ -20,14 +20,14 @@ def file_toucher(): # создаём случайные файлы
 
 
 def git_pusher():
-    os.chdir(files_path)
-    if (len(files_path) >= 2):
+    os.chdir(FILES_PATH)
+    if (len(FILES_PATH) >= 5):
         call (['git', 'add', '*'])
         time.sleep(1.5) # in seconds
         call (['git', 'commit', '-a', '--allow-empty-message', '-m', ' ' ])
         time.sleep(1.5)
     else:
-        print ('Надо набрать 3 файла')
+        print ('Надо набрать 5 файлов')
 
 
 def proc(file_count):
@@ -40,7 +40,7 @@ def proc(file_count):
             file_count = file_count + 1
             # print (file_count)
 
-            if file_count == 2:
+            if file_count == 5:
                 print('Создано ' + str(file_count) + ' случайных файла.')
                 break  
 
