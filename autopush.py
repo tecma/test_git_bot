@@ -22,7 +22,7 @@ def file_toucher(): # создаём случайные файлы
 def git_pusher():
     os.chdir(FILES_PATH)
     if (len(FILES_PATH) >= 5):
-        call (['git', 'add', '*', '-q'])
+        call (['git', 'add', '*'])
         time.sleep(1) # in seconds
         call (['git', 'commit', '-a', '--allow-empty-message', '-m', ' ', '-q' ])
         time.sleep(1)
