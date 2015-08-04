@@ -1,18 +1,87 @@
 #!/usr/bin/python3
 
-import os, time, re # работа с ос, время, регулярки
+import os, time, re, errno # работа с ос, время, регулярки, ошибки
 from subprocess import call # subprocess module (для прямой работы с sh)
 
+# os.environ словарь переменных окружения
+# standard input is usually file descriptor 0, standard output is 1, and standard error is 2
+# further files opened by a process will then be assigned 3, 4, 5, and so forth.
+
+EXEC_PATH = os.path.abspath(os.curdir)
+P_PATH = EXEC_PATH+'/PROJECTSDIR'
+
+
+
+def initialize():
+
+    if os.path.exists(P_PATH):
+
+        p_name = input(u'Введите имя для нового проекта: ')
+        # тут нужны проверки и исключения
+        new_p = P_PATH+'/'+p_name
+
+        os.mkdir(new_p, mode=0o777)
+        os.mkdir(new_p+'/docs', mode=0o777)
+        os.mkdir(new_p+'/code', mode=0o777)
+
+        git_init(new_p)
+        
+    else:
+
+        os.mkdir(P_PATH, mode=0o777)                     
+        initialize()
+
+
+def git_init(new_p):
+        os.chdir(new_p)
+    # if
+    # проверка на существование инициализированного гита (нужна ли?)
+        call (['git', 'init'])
+        time.sleep(2)
+        call (['git', 'clone', 'git@github.com:tecma/test_git_bot.git'])
+        time.sleep(5)
+        call (['git', 'remote', 'set-url', 'origin', 'git@github.com:tecma/test_git_bot.git'])
+        # попробовать всю последовательность
+        # указать ремоут 
+        # предложить добавить ключ для удалённого репозитория
+
+
+
+    # dir checking
+    # если директория проекты не существует -- создать её, если существует идти дальше
+    # предложить создать новый проект и назвать его
+    # развернуть в проекте стандартные папки
+    # начать инициализацию гит, автоматическая подстановка репозитория
+    # зашвырнуть кастомный gitconfig
+
+
+def tracking():
+    # отслеживать состояние репозитория
+    # ждать push
+    pass
 
 def git_looker():
+    
     call (['git', 'pull'])
     time.sleep(1) # in seconds
 
+def git_pusher():
+    os.chdir(FILES_PATH)
+    call (['git', 'add', '*'])
+    time.sleep(1)
+    call (['git', 'commit', '-a', '--allow-empty-message', '-m', ' '])
+    time.sleep(1)
+    call (['git', 'push'])
+    time.sleep(2.5)
 
-while True:
-    pass
-    git_looker()
 
+def proc():
+    while True:
+        pass
+        git_looker()
+
+
+initialize()
 
 # справки см. внизу под всем этим
 
